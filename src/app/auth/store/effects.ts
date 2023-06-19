@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PersistanceService } from 'src/app/shared/services/persistance.service';
 import { Router } from '@angular/router';
 
+// ** Register **
 export const registerEffect = createEffect(
   (
     actions$ = inject(Actions),
@@ -46,4 +47,73 @@ export const redirectAfterRegistration = createEffect(
     );
   },
   { functional: true, dispatch: false }
+);
+
+// ** Login **
+export const loginEffect = createEffect(
+  (
+    actions$ = inject(Actions),
+    authService = inject(AuthService),
+    persistanceService = inject(PersistanceService)
+  ) => {
+    return actions$.pipe(
+      ofType(authActions.login),
+      switchMap(({ request }) => {
+        return authService.login(request).pipe(
+          map((currentUser: CurrentUserInterface) => {
+            persistanceService.set('accessToken', currentUser.token);
+            return authActions.loginSuccess({ currentUser });
+          }),
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              authActions.loginFailure({
+                errors: errorResponse.error.errors,
+              })
+            );
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const redirectAfterLogin = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(authActions.loginSuccess),
+      tap(() => {
+        router.navigateByUrl('/');
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);
+
+// ** Get Current User **
+export const GetCurrentUserEffect = createEffect(
+  (
+    actions$ = inject(Actions),
+    authService = inject(AuthService),
+    persistanceService = inject(PersistanceService)
+  ) => {
+    return actions$.pipe(
+      ofType(authActions.getCurrentUser),
+      switchMap(() => {
+        const token = persistanceService.get('accessToken');
+        if (!token) {
+          return of(authActions.getCurrentUserFailure());
+        }
+        return authService.getCurrentUser().pipe(
+          map((currentUser: CurrentUserInterface) => {
+            return authActions.getCurrentUserSuccess({ currentUser });
+          }),
+          catchError(() => {
+            return of(authActions.getCurrentUserFailure());
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
 );
