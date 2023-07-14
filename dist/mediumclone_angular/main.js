@@ -62,10 +62,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const appRoutes = [{
   path: 'register',
-  loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_auth_auth_routes_ts").then(__webpack_require__.bind(__webpack_require__, /*! src/app/auth/auth.routes */ 9209)).then(m => m.registerRoutes)
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_components_backendErrorMessages_backendErrorMessages_component_ts-node-41f376"), __webpack_require__.e("src_app_auth_auth_routes_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/auth/auth.routes */ 9209)).then(m => m.registerRoutes)
 }, {
   path: 'login',
-  loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_auth_auth_routes_ts").then(__webpack_require__.bind(__webpack_require__, /*! src/app/auth/auth.routes */ 9209)).then(m => m.loginRoutes)
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_components_backendErrorMessages_backendErrorMessages_component_ts-node-41f376"), __webpack_require__.e("src_app_auth_auth_routes_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/auth/auth.routes */ 9209)).then(m => m.loginRoutes)
 }, {
   path: '',
   loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_components_banner_banner_component_ts-src_app_shared_components_feed_f-5889ab"), __webpack_require__.e("src_app_globalFeed_globalFeed_routes_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/globalFeed/globalFeed.routes */ 8454)).then(m => m.globalFeedRoutes)
@@ -75,6 +75,15 @@ const appRoutes = [{
 }, {
   path: 'tags/:slug',
   loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_components_banner_banner_component_ts-src_app_shared_components_feed_f-5889ab"), __webpack_require__.e("src_app_tagFeed_tagFeed_routes_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/tagFeed/tagFeed.routes */ 3615)).then(m => m.tagFeedRoutes)
+}, {
+  path: 'articles/new',
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_components_backendErrorMessages_backendErrorMessages_component_ts-node-41f376"), __webpack_require__.e("common"), __webpack_require__.e("src_app_createArticle_createArticle_route_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/createArticle/createArticle.route */ 439)).then(m => m.routes)
+}, {
+  path: 'articles/:slug',
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_article_article_route_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/article/article.route */ 1562)).then(m => m.routes)
+}, {
+  path: 'articles/:slug/edit',
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_components_backendErrorMessages_backendErrorMessages_component_ts-node-41f376"), __webpack_require__.e("common"), __webpack_require__.e("src_app_editArticle_editArticle_route_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/editArticle/editArticle.route */ 2318)).then(m => m.routes)
 }];
 
 /***/ }),
