@@ -11,6 +11,7 @@ import { provideEffects } from '@ngrx/effects';
 import * as authEffects from 'src/app/auth/store/effects';
 import * as feedEffects from 'src/app/shared/components/feed/store/effects';
 import * as tagsEffects from 'src/app/shared/components/tags/store/effects';
+import * as addToFavoritesEffects from 'src/app/shared/components/addToFavorites/store/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { authInterceptor } from './app/auth/services/auth.interceptor';
 import {
@@ -33,7 +34,12 @@ bootstrapApplication(AppComponent, {
     provideState(authFeatureKey, authReducer),
     provideState(feedFeatureKey, feedReducer),
     provideState(tagsFeatureKey, tagsReducer),
-    provideEffects(authEffects, feedEffects, tagsEffects),
+    provideEffects(
+      authEffects,
+      feedEffects,
+      tagsEffects,
+      addToFavoritesEffects
+    ),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
