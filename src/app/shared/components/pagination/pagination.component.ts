@@ -22,6 +22,7 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {
     this.pagesCount = Math.ceil(this.total / this.currentPage);
+    // this.limit = this.total % 10;
 
     this.pages =
       this.pagesCount > 0 ? this.utilsService.range(1, this.limit) : [];
